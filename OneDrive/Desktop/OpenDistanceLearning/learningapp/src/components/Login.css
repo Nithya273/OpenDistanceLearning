@@ -1,0 +1,257 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400");
+
+/* Variables */
+:root {
+  --background: #007E62;
+  --tabs-base-color: #e6e6e6;
+  --tabs-inactive-color: #d8d8d8;
+  --green: #17BD96;
+  --radius: 5px;
+}
+
+/* Global Styles */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  box-sizing: inherit;
+}
+
+body {
+  background: var(--background);
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 1em;
+  color: #737373;
+  padding: 3em 0 0 0;
+}
+
+/* Grid */
+.grid {
+  display: block;
+}
+
+/* Cube */
+.cube {
+  transition: transform 0.33s;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  height: 100px;
+  width: 30%;
+  margin: 0 auto;
+}
+
+/* Cube Item */
+.cube .item {
+  background-color: var(--tabs-base-color);
+  height: 345px;
+  width: 300px;
+  border-radius: var(--radius);
+  transform: translateZ(172.5px);
+}
+
+/* Done */
+.done {
+  background-color: var(--tabs-base-color);
+  height: 345px;
+  width: 300px;
+  transform: rotateX(-90deg) translateZ(-172.5px);
+  border-radius: var(--radius);
+  border: 2px solid var(--green);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Fill */
+.done #fill {
+  position: absolute;
+  width: 1%;
+  height: 1%;
+  top: 50%;
+  left: 50%;
+  background-color: var(--green);
+  opacity: 0;
+  border-radius: 50%;
+}
+
+/* Canvas */
+#canvas {
+  position: absolute;
+  width: 300px;
+  height: 345px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Success */
+.done .success {
+  text-align: center;
+  position: relative;
+  z-index: 99;
+  opacity: 0;
+  margin: 0 auto;
+  color: #fff;
+  margin-top: 35px;
+  font-size: 2em;
+}
+
+.done .success i {
+  display: block;
+  font-size: 200px;
+}
+
+/* Tabs */
+.tabs {
+  float: none;
+  list-style: none;
+}
+
+.tabs li {
+  width: 50%;
+  float: left;
+  display: block;
+}
+
+.tabs li:first-child label.nav {
+  border-radius: var(--radius) 0 0 0;
+  border-right: 1px solid #bfbfbf; /* darken($tabs-inactive-color, 10%) */
+}
+
+.tabs li:last-child label.nav {
+  border-radius: 0 var(--radius) 0 0;
+}
+
+/* Input Radio */
+.tabs input[type='radio'] {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+/* Nav Label */
+.tabs .nav {
+  display: block;
+  padding: 14px;
+  font-weight: 300;
+  background: var(--tabs-inactive-color);
+  cursor: pointer;
+  position: relative;
+  top: 0;
+  border-bottom: 1px solid #bfbfbf; /* darken($tabs-inactive-color, 10%) */
+  text-align: center;
+  transition: all 0.1s ease-in-out;
+}
+
+/* Tab Content */
+.tab-content {
+  margin-top: 45px;
+  z-index: 2;
+  display: none;
+  overflow: hidden;
+  width: 100%;
+  line-height: 25px;
+  padding: 25px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.tab-content .frm {
+  font-weight: 400;
+  font-size: .8em;
+}
+
+.tab-content input[type='email'],
+.tab-content input[type='password'] {
+  display: block;
+  line-height: 25px;
+  width: 90%;
+  padding: 3px 10px;
+  font-weight: 300;
+  font-size: .8em;
+  outline: none;
+  box-sizing: content-box;
+  border: 1px solid var(--tabs-inactive-color);
+  transition: all 0.30s ease-in-out;
+}
+
+.tab-content input[type='email']:focus,
+.tab-content input[type='password']:focus {
+  border: 1px solid var(--green);
+}
+
+.tab-content input {
+  margin-bottom: 10px;
+}
+
+#loginBtn {
+  width: 100%;
+  background-color: var(--green);
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid var(--green);
+  border-radius: var(--radius);
+  cursor: pointer;
+  color: #fff;
+  outline: none;
+  font-size: 1em;
+  font-weight: light;
+  transition: all 0.1s ease-in-out;
+}
+
+#loginBtn:hover {
+  background-color: #00a080; /* lighten($green, 5%) */
+}
+
+.tab-content span {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: .8em;
+}
+
+.tab-content a,
+.tab-content a:active,
+.tab-content a:visited {
+  color: var(--green);
+}
+
+/* Checked Tab Label */
+[id^="tab"]:checked + label {
+  z-index: 50;
+  box-sizing: border-box;
+  background-color: var(--tabs-base-color);
+  color: var(--green);
+}
+
+[id^="tab"]:checked + label:after,
+[id^="tab"]:checked + label:before {
+  z-index: 50;
+  content: "";
+  position: absolute;
+  border-style: solid;
+  border-color: transparent;
+  border-bottom: 0;
+  border-width: 10px;
+  left: 45%;
+}
+
+[id^="tab"]:checked + label:before {
+  bottom: -11px;
+  border-top-color: #bfbfbf; /* darken($tabs-inactive-color, 10%) */
+}
+
+[id^="tab"]:checked + label:after {
+  bottom: -9.5px;
+  border-top-color: var(--tabs-base-color);
+}
+
+/* Show Tab Content */
+[id^="tab"]:checked ~ [class^="tab-content"] {
+  display: block;
+}
